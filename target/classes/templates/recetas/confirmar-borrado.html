@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Borrado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="text-danger">Confirmar Borrado de Receta</h1>
+    <hr>
+
+    <div class="alert alert-danger">
+        <strong>¡Atención!</strong> Estás a punto de eliminar la receta <strong th:text="${receta.nombre}"></strong>.
+        <br>
+        <em>Esta acción también eliminará <strong>todos los pasos</strong> asociados a esta receta de forma permanente.</em>
+    </div>
+
+    <!-- Formulario que ejecuta el borrado real por POST -->
+    <form th:action="@{/recetas/borrar/{id}(id=${receta.id})}" method="post">
+        <button type="submit" class="btn btn-danger">Sí, eliminar receta y sus pasos</button>
+        <a th:href="@{/recetas}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

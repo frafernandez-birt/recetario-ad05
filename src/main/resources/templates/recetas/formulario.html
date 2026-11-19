@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Receta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <!-- Si la receta tiene ID, mostramos "Editar", si no, "Nueva" -->
+    <h1 th:text="${receta.id == null ? 'Nueva Receta' : 'Editar Receta'}">Formulario</h1>
+    <hr>
+
+    <!-- El formulario envía los datos por POST a /recetas/guardar -->
+    <form th:action="@{/recetas/guardar}" th:object="${receta}" method="post">
+        
+        <!-- Campo oculto para el ID. Vital para que la edición no cree un duplicado -->
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" th:field="*{nombre}" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción:</label>
+            <textarea class="form-control" th:field="*{descripcion}" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a th:href="@{/recetas}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>
